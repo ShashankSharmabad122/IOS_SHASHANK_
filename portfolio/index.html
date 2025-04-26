@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHASHANK SHARMA - Developer & Problem Solver</title>
+    <link rel="stylesheet" href="styles1.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link href="https://fonts.googleapis.com/icon?family=Material Icons" rel="stylesheet">
+    <script defer src="script1.js"></script>
+</head>
+
+<body>
+    <div class="background-gradient"></div>
+
+    <header class="portfolio-header">
+       <div class="logo-container">
+            <div class="logo">SS</div>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#work">Work</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+             </ul>
+         </nav>
+         <div class="header-actions">
+             <button class="theme-toggle" onclick="toggleTheme()">
+                 <span class="material-icons">dark_mode</span>
+             </button>
+             <button class="menu-toggle" id="mobileMenuToggle">
+                 <span class="material-icons">menu</span>
+             </button>
+         </div>
+     </header>
+ 
+     <div class="mobile-menu" id="mobileMenu">
+         <div class="mobile-menu-header">
+             <div class="logo">SS</div>
+             <button class="close-menu" id="closeMenu">
+                 <span class="material-icons">close</span>
+             </button>
+         </div>
+         <nav class="mobile-nav">
+             <ul>
+                 <li><a href="#home">Home</a></li>
+                 <li><a href="#work">Work</a></li>
+                 <li><a href="#skills">Skills</a></li>
+                 <li><a href="#about">About</a></li>
+                 <li><a href="#contact">Contact</a></li>
+             </ul>
+         </nav>
+         <div class="mobile-social">
+             <a href="www.linkedin.com/in/shashank-sharma-26a0a6256//" target="_blank">LinkedIn</a>
+             <a href="https://github.com/ShashankSharmabad122" target="_blank">GitHub</a>
+             <a href="https://twitter.com/@Shashank_0804" target="_blank">Twitter</a>
+         </div>
+     </div>
+ 
+     <main>
+         <section id="home" class="hero-section">
+             <div class="hero-content">
+                 <div class="announcement">
+                     <a href="#work">Check out my latest projects!</a>
+                 </div>
+                 <h1 class="hero-title">I help clients turn ideas <br>into seamless digital experiences</h1>
+                 <div class="hero-intro">
+                     <p>Hello, I'm <span class="highlight">SHASHANK SHARMA</span> 👋</p>
+                     <h2>a Full Stack Developer</h2>
+                 </div>
+                 <div class="hero-cta">
+                     <a href="#contact" class="primary-button">Let's Connect</a>
+                     <a href="mailto:shashanksharma411985@gmail.com" class="secondary-link">shashanksharma411985@gmail.com</a>
+                 </div>
+             </div>
+             <div class="hero-image">
+                 <img src="assets/profile.jpg" alt="SHASHANK SHARMA" class="profile-image">
+                 <div class="connections">
+                     <div class="connection-dot" style="top: 20%; left: 80%;"></div>
+                     <div class="connection-dot" style="top: 40%; left: 90%;"></div>
+                     <div class="connection-dot" style="top: 60%; left: 85%;"></div>
+                     <div class="connection-dot" style="top: 80%; left: 75%;"></div>
+                 </div>
+             </div>
+         </section>
+ 
+         <section class="features-section">
+             <div class="feature-card">
+                 <h3>Collaboration</h3>
+                 <p>I prioritize client collaboration, fostering open communication</p>
+                 <a href="#contact" class="feature-link">Book a call</a>
+             </div>
+             <div class="feature-card">
+                 <h3>Remote Work</h3>
+                 <p>I'm very flexible with time zone communications</p>
+                 <div class="timezone">
+                     <p>India - <span id="currentTime">00:00</span></p>
+                 </div>
+                 <a href="#contact" class="feature-link">Connect now</a>
+             </div>
+             <div class="feature-card">
+                 <h3>Tech Enthusiast</h3>
+                 <p>Passionate about cutting-edge development technologies</p>
+                 <a href="#skills" class="feature-link">Know more</a>
+             </div>
+         </section>
+ 
+         <div class="tech-icons-strip">
+             <div class="tech-icons-scroll">
+                 <!-- Tech icons will be repeated for scrolling effect -->
+                 <img src="https://cdn.simpleicons.org/typescript" alt="TypeScript">
+                 <img src="https://cdn.simpleicons.org/javascript" alt="JavaScript">
+                 <img src="https://cdn.simpleicons.org/react" alt="React">
+                 <img src="https://cdn.simpleicons.org/nextdotjs/white" alt="Next.js">
+                 <img src="https://cdn.simpleicons.org/nodedotjs" alt="Node.js">
+                 <img src="https://cdn.simpleicons.org/html5" alt="HTML5">
+                 <img src="https://cdn.simpleicons.org/css3" alt="CSS3">
+                 <img src="https://cdn.simpleicons.org/express/white" alt="Express">
+                 <img src="https://cdn.simpleicons.org/mongodb" alt="MongoDB">
+                 <img src="https://cdn.simpleicons.org/postgresql" alt="PostgreSQL">
+                 <img src="https://cdn.simpleicons.org/git" alt="Git">
+                 <img src="https://cdn.simpleicons.org/github/white" alt="GitHub">
+                 <img src="https://cdn.simpleicons.org/tailwindcss" alt="Tailwind CSS">
+                 <!-- Repeat for scrolling effect -->
+                 <img src="https://cdn.simpleicons.org/typescript" alt="TypeScript">
+                 <img src="https://cdn.simpleicons.org/javascript" alt="JavaScript">
+                 <img src="https://cdn.simpleicons.org/react" alt="React">
+                 <img src="https://cdn.simpleicons.org/nextdotjs/white" alt="Next.js">
+                 <img src="https://cdn.simpleicons.org/nodedotjs" alt="Node.js">
+                 <img src="https://cdn.simpleicons.org/html5" alt="HTML5">
+                 <img src="https://cdn.simpleicons.org/css3" alt="CSS3">
+                 <img src="https://cdn.simpleicons.org/express/white" alt="Express">
+                 <img src="https://cdn.simpleicons.org/mongodb" alt="MongoDB">
+                 <img src="https://cdn.simpleicons.org/postgresql" alt="PostgreSQL">
+                 <img src="https://cdn.simpleicons.org/git" alt="Git">
+                 <img src="https://cdn.simpleicons.org/github/white" alt="GitHub">
+                 <img src="https://cdn.simpleicons.org/tailwindcss" alt="Tailwind CSS">
+             </div>
+         </div>
+ 
+         <section class="services-section">
+             <div class="section-header">
+                 <div class="logo-wings">
+                     <div class="wing left-wing"></div>
+                     <div class="logo-small">SS</div>
+                     <div class="wing right-wing"></div>
+                 </div>
+                 <h2>Let's work together on your next project</h2>
+                 <p>shashanksharma411985@gmail.com | 7979712478</p>
+             </div>
+ 
+             <div class="services-grid">
+                 <div class="service-card">
+                     <h3>Responsive Web Design</h3>
+                     <p>Creating websites that work flawlessly across all devices, from desktops to smartphones.</p>
+                 </div>
+                 <div class="service-card">
+                     <h3>Full-Stack Development</h3>
+                     <p>End-to-end solutions with robust backend systems and intuitive frontend interfaces.</p>
+                 </div>
+                 <div class="service-card">
+                     <h3>UI/UX Design</h3>
+                     <p>User-centered design that enhances engagement and creates memorable experiences.</p>
+                 </div>
+                 <div class="service-card">
+                     <h3>API Development</h3>
+                     <p>Building efficient, secure, and well-documented APIs for seamless integration.</p>
+                 </div>
+                 <div class="service-card">
+                     <h3>Performance Optimization</h3>
+                     <p>Enhancing website speed and efficiency for better user experience and SEO ranking.</p>
+                 </div>
+             </div>
+         </section>
+ 
+         <section id="work" class="work-section">
+             <div class="section-title">
+                 <h2>FEATURED CASE STUDIES</h2>
+                 <p>Curated work</p>
+             </div>
+ 
+             <div class="projects-grid">
+                 <div class="project-card">
+                     <div class="project-image">
+                         <img src="assets/project1.jpg" alt="Project 1">
+                     </div>
+                     <div class="project-content">
+                         <h3>SHASHANK OS</h3>
+                         <p>A web-based operating system interface with multiple applications and a sleek, modern design.</p>
+                         <div class="project-tech">
+                             <span>HTML5</span>
+                             <span>CSS3</span>
+                             <span>JavaScript</span>
+                             <span>PHP</span>
+                         </div>
+                         <div class="project-links">
+                             <a href="https://github.com/ShashankSharmabad122" class="https://github.com/ShashankSharmabad122">Source code</a>
+                             <a href="#" class="project-link">Live Demo</a>
+                         </div>
+                     </div>
+                 </div>
+ 
+                 <div class="project-card">
+                     <div class="project-image">
+                         <img src="assets/project2.jpg" alt="Project 2">
+                     </div>
+                     <div class="project-content">
+                         <h3>E-Commerce Platform</h3>
+                         <p>A full-featured online shopping platform with secure payment processing and inventory management.</p>
+                         <div class="project-tech">
+                             <span>React</span>
+                             <span>Node.js</span>
+                             <span>MongoDB</span>
+                             <span>Express</span>
+                         </div>
+                         <div class="project-links">
+                             <a href="#" class="project-link">Source code</a>
+                             <a href="#" class="project-link">Coming soon</a>
+                         </div>
+                     </div>
+                 </div>
+ 
+                 <div class="project-card">
+                     <div class="project-image">
+                         <img src="assets/project3.jpg" alt="Project 3">
+                     </div>
+                     <div class="project-content">
+                         <h3>Task Management App</h3>
+                         <p>A productivity application for organizing tasks, setting deadlines, and tracking progress.</p>
+                         <div class="project-tech">
+                             <span>Vue.js</span>
+                             <span>Firebase</span>
+                             <span>Tailwind CSS</span>
+                         </div>
+                         <div class="project-links">
+                             <a href="#" class="project-link">Source code</a>
+                             <a href="#" class="project-link">Live Demo</a>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+ 
+             <div class="view-more-container">
+                 <a href="#" class="view-more-button">See more projects</a>
+             </div>
+         </section>
+ 
+         <section id="skills" class="skills-section">
+             <div class="section-title">
+                 <h2>I constantly try to improve</h2>
+                 <p>My Tech Stack</p>
+             </div>
+ 
+             <div class="skills-container">
+                 <div class="skills-image">
+                     <img src="assets/skills.jpg" alt="Skills visualization">
+                 </div>
+                 <div class="skills-grid">
+                     <div class="skill-item">
+                         <img src="https://cdn.simpleicons.org/html5" alt="HTML5">
+                         <span>HTML5</span>
+                     </div>
+                     <div class="skill-item">
+                         <img src="https://cdn.simpleicons.org/css3" alt="CSS3">
+                         <span>CSS3</span>
+                     </div>
+                     <div class="skill-item">
+                         <img src="https://cdn.simpleicons.org/javascript" alt="JavaScript">
+                         <span>JavaScript</span>
+                     </div>
+                     <div class="skill-item">
+                         <img src="https://cdn.simpleicons.org/typescript" alt="TypeScript">
+                         <span>TypeScript</span>
+                     </div>
+                     <div class="skill-item">
+                         <img src="https://cdn.simpleicons.org/react" alt="React">
+                         <span>React</span>
+                     </div>
+                     <div class="skill-item">
+                         <img src="https://cdn.simpleicons.org/nextdotjs/white" alt="Next.js">
+                         <span>Next.js</span>
+                     </div>
+                     <div class="skill-item">
+                         <img src="https://cdn.simpleicons.org/nodedotjs" alt="Node.js">
+                         <span>Node.js</span>
+                     </div>
+                     <div class="skill-item">
+                         <img src="https://cdn.simpleicons.org/express/white" alt="Express">
+                         <span>Express</span>
+                     </div>
+                     <div class="skill-item">
+                         <img src="https://cdn.simpleicons.org/mongodb" alt="MongoDB">
+                         <span>MongoDB</span>
+                     </div>
+                     <div class="skill-item">
+                         <img src="https://cdn.simpleicons.org/mysql" alt="MySQL">
+                         <span>MySQL</span>
+                     </div>
+                     <div class="skill-item">
+                         <img src="https://cdn.simpleicons.org/git" alt="Git">
+                         <span>Git</span>
+                     </div>
+                     <div class="skill-item">
+                         <img src="https://cdn.simpleicons.org/github/white" alt="GitHub">
+                         <span>GitHub</span>
+                     </div>
+                     <div class="skill-item">
+                         <img src="https://cdn.simpleicons.org/tailwindcss" alt="Tailwind CSS">
+                         <span>Tailwind CSS</span>
+                     </div>
+                     <div class="skill-item">
+                         <img src="https://cdn.simpleicons.org/php" alt="PHP">
+                         <span>PHP</span>
+                     </div>
+                     <div class="skill-item">
+                         <img src="https://cdn.simpleicons.org/python" alt="Python">
+                         <span>Python</span>
+                     </div>
+                 </div>
+             </div>
+ 
+             <div class="qualities-container">
+                 <div class="quality-tag">Accessible</div>
+                 <div class="quality-tag">Responsive</div>
+                 <div class="quality-tag">Dynamic</div>
+                 <div class="quality-tag">Scalable</div>
+                 <div class="quality-tag">Search Optimized</div>
+                 <div class="quality-tag">Interactive</div>
+                 <div class="quality-tag">Secure</div>
+                 <div class="quality-tag">Reliable</div>
+                 <div class="quality-tag">Engaging</div>
+             </div>
+         </section>
+ 
+         <section id="about" class="about-section">
+             <div class="section-title">
+                 <h2>MORE ABOUT ME</h2>
+                 <p>Full-Stack Developer and a little bit of everything</p>
+             </div>
+ 
+             <div class="about-content">
+                 <div class="about-text">
+                     <p>I'm SHASHANK SHARMA, a proactive full-stack developer passionate about creating dynamic web experiences. From frontend to backend, I thrive on solving complex problems with clean, efficient code. My expertise spans across various technologies, and I'm always eager to learn more.</p>
+                     <p>When I'm not coding, I'm exploring new ideas and staying curious. Life's about balance, and I love embracing every part of it.</p>
+                     <p>I believe in waking up each day eager to make a difference!</p>
+ 
+                     <div class="social-links">
+                         <a href="https://linkedin.com/in/yourusername" class="social-link">LinkedIn</a>
+                         <a href="https://github.com/yourusername" class="social-link">GitHub</a>
+                         <a href="https://twitter.com/yourusername" class="social-link">Twitter</a>
+                     </div>
+                 </div>
+                 <div class="about-image">
+                     <div class="image-container">
+                         <img src="assets/about.jpg" alt="SHASHANK SHARMA">
+                     </div>
+                 </div>
+             </div>
+         </section>
+ 
+         <section class="testimonials-section">
+             <div class="section-title">
+                 <h2>TESTIMONIALS</h2>
+                 <p>Word on the street about me</p>
+             </div>
+ 
+             <div class="testimonials-slider">
+                 <div class="testimonial-card">
+                     <p class="testimonial-text">"SHASHANK has an exceptional ability to bring our design concepts to life. His attention to detail and dedication to creating seamless user experiences have greatly enhanced our projects. His skills in development are truly impressive, and he's always ready to tackle any challenge that comes his way."</p>
+                     <div class="testimonial-author">
+                         <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Testimonial author">
+                         <div class="author-info">
+                             <h4>Sarah Johnson</h4>
+                             <p>Product Lead • TechCorp</p>
+                         </div>
+                     </div>
+                 </div>
+ 
+                 <div class="testimonial-card">
+                     <p class="testimonial-text">"Working with SHASHANK has been a fantastic experience. He's not only highly skilled in technologies but also brings a refreshing creativity to every project. His ability to solve complex problems quickly and effectively makes him a key asset to our team. Plus, he's a great collaborator who makes the work environment better for everyone."</p>
+                     <div class="testimonial-author">
+                         <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Testimonial author">
+                         <div class="author-info">
+                             <h4>Michael Chen</h4>
+                             <p>Senior Designer • DigitalWave</p>
+                         </div>
+                     </div>
+                 </div>
+ 
+                 <div class="testimonial-card">
+                     <p class="testimonial-text">"SHASHANK delivered exceptional work on our project. His meticulous approach and strong communication skills greatly enhanced the quality of our web applications. He's a dependable developer who collaborates seamlessly with the team."</p>
+                     <div class="testimonial-author">
+                         <img src="https://randomuser.me/api/portraits/women/46.jpg" alt="Testimonial author">
+                         <div class="author-info">
+                             <h4>Emily Rodriguez</h4>
+                             <p>Manager • InnovateTech</p>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+ 
+             <div class="testimonial-controls">
+                 <button class="testimonial-prev">←</button>
+                 <div class="testimonial-dots">
+                     <span class="dot active"></span>
+                     <span class="dot"></span>
+                     <span class="dot"></span>
+                 </div>
+                 <button class="testimonial-next">→</button>
+             </div>
+         </section>
+ 
+         <section id="contact" class="contact-section">
+             <div class="contact-header">
+                 <div class="logo-wings">
+                     <div class="wing left-wing"></div>
+                     <div class="logo-small">SS</div>
+                     <div class="wing right-wing"></div>
+                 </div>
+                 <h2>FROM CONCEPT TO CREATION</h2>
+                 <h3>LET'S MAKE IT HAPPEN!</h3>
+             </div>
+ 
+             <div class="contact-content">
+                 <div class="contact-info">
+                     <h3>Get In Touch</h3>
+                     <p>I'm available for full-time roles & freelance projects.</p>
+                     <p>I thrive on crafting dynamic web applications, and delivering seamless user experiences.</p>
+ 
+                     <div class="contact-name">
+                         <h4>SHASHANK SHARMA</h4>
+                         <p>Help you create experiences where aesthetics & functionality seamlessly come together.</p>
+                     </div>
+ 
+                     <div class="social-links">
+                         <a href="https://linkedin.com/in/yourusername" class="social-link">LinkedIn</a>
+                         <a href="https://github.com/yourusername" class="social-link">GitHub</a>
+                         <a href="https://twitter.com/yourusername" class="social-link">Twitter</a>
+                     </div>
+                 </div>
+ 
+                 <div class="contact-form">
+                     <h3>Send me a message</h3>
+                     <form id="contactForm">
+                         <div class="form-group">
+                             <label for="name">Name</label>
+                             <input type="text" id="name" name="name" required>
+                         </div>
+                         <div class="form-group">
+                             <label for="email">Email</label>
+                             <input type="email" id="email" name="email" required>
+                         </div>
+                         <div class="form-group">
+                             <label for="message">Message</label>
+                             <textarea id="message" name="message" rows="5" required></textarea>
+                         </div>
+                         <button type="submit" class="submit-button">Send Message</button>
+                     </form>
+                 </div>
+             </div>
+         </section>
+     </main>
+ 
+     <footer class="portfolio-footer">
+         <div class="footer-content">
+             <div class="footer-logo">
+                 <div class="logo">SS</div>
+                 <p>SHASHANK SHARMA</p>
+             </div>
+             <div class="footer-links">
+                 <div class="footer-column">
+                     <h4>General</h4>
+                     <ul>
+                         <li><a href="#home">Home</a></li>
+                         <li><a href="#work">Projects</a></li>
+                         <li><a href="#skills">Skills</a></li>
+                         <li><a href="#about">About</a></li>
+                     </ul>
+                 </div>
+                 <div class="footer-column">
+                     <h4>Connect</h4>
+                     <ul>
+                         <li><a href="https://linkedin.com/in/yourusername">LinkedIn</a></li>
+                         <li><a href="https://github.com/yourusername">GitHub</a></li>
+                         <li><a href="https://twitter.com/yourusername">Twitter</a></li>
+                         <li><a href="#contact">Contact</a></li>
+                     </ul>
+                 </div>
+             </div>
+             <div class="footer-contact">
+                 <h4>Feel free to reach out to me for any inquiries or collaboration opportunities.</h4>
+                 <a href="mailto:your-email@example.com" class="footer-email">shashanksharma411985@gmail.com</a>
+             </div>
+         </div>
+         <div class="footer-bottom">
+             <p>Copyright © <span id="currentYear"></span> SHASHANK SHARMA. All rights reserved.</p>
+         </div>
+     </footer>
+ 
+     <div class="back-to-top" id="backToTop">
+         <span class="material-icons">arrow_upward</span>
+     </div>
+ </body>
+ 
+ </html>

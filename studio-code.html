@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShashankOS-Studio-Code</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="studio-code.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+    <script defer src="studio-code.js"></script>
+</head>
+
+<body class="studio-code-body">
+    <div class="studio-container">
+        <!-- Activity Bar (left sidebar) -->
+        <div class="activity-bar">
+            <div class="activity-bar-top">
+                <div class="activity-icon active" data-view="explorer" title="Explorer">
+                    <i class="fas fa-folder"></i>
+                </div>
+                <div class="activity-icon" data-view="search" title="Search">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="activity-icon" data-view="git" title="Source Control">
+                    <i class="fas fa-code-branch"></i>
+                </div>
+                <div class="activity-icon" data-view="debug" title="Run and Debug">
+                    <i class="fas fa-bug"></i>
+                </div>
+                <div class="activity-icon" data-view="extensions" title="Extensions">
+                    <i class="fas fa-puzzle-piece"></i>
+                </div>
+            </div>
+            <div class="activity-bar-bottom">
+                <div class="activity-icon" data-view="settings" title="Settings">
+                    <i class="fas fa-cog"></i>
+                </div>
+                <div class="activity-icon" data-view="account" title="Account">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Side Bar (explorer, search, etc.) -->
+        <div class="side-bar">
+            <div class="side-bar-header">
+                <span class="side-bar-title">EXPLORER</span>
+                <div class="side-bar-actions">
+                    <button class="icon-button" title="New File">
+                        <i class="fas fa-file"></i>
+                    </button>
+                    <button class="icon-button" title="New Folder">
+                        <i class="fas fa-folder-plus"></i>
+                    </button>
+                    <button class="icon-button" title="Refresh">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                    <button class="icon-button" title="Collapse">
+                        <i class="fas fa-chevron-up"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="side-bar-content">
+                <div class="folder-tree">
+                    <div class="folder-item expanded">
+                        <div class="folder-header">
+                            <i class="folder-icon fas fa-chevron-down"></i>
+                            <i class="folder-icon fas fa-folder-open"></i>
+                            <span class="folder-name">ShashankOS Project</span>
+                        </div>
+                        <div class="folder-content">
+                            <div class="file-item" data-file="index.html">
+                                <i class="file-icon fas fa-html5" style="color: #E44D26;"></i>
+                                <span class="file-name">index.html</span>
+                            </div>
+                            <div class="file-item" data-file="style.css">
+                                <i class="file-icon fas fa-css3-alt" style="color: #264DE4;"></i>
+                                <span class="file-name">style.css</span>
+                            </div>
+                            <div class="file-item" data-file="app.js">
+                                <i class="file-icon fab fa-js-square" style="color: #F0DB4F;"></i>
+                                <span class="file-name">app.js</span>
+                            </div>
+                            <div class="folder-item">
+                                <div class="folder-header">
+                                    <i class="folder-icon fas fa-chevron-right"></i>
+                                    <i class="folder-icon fas fa-folder"></i>
+                                    <span class="folder-name">assets</span>
+                                </div>
+                            </div>
+                            <div class="file-item" data-file="README.md">
+                                <i class="file-icon fab fa-markdown" style="color: #083fa1;"></i>
+                                <span class="file-name">README.md</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Editor Area -->
+        <div class="editor-container">
+            <!-- Tabs -->
+            <div class="editor-tabs">
+                <div class="tab active" data-file="welcome.md">
+                    <span class="tab-name">welcome.md</span>
+                    <button class="tab-close"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="tab" data-file="index.html">
+                    <span class="tab-name">index.html</span>
+                    <button class="tab-close"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="new-tab">
+                    <i class="fas fa-plus"></i>
+                </div>
+            </div>
+
+            <!-- Editor Content -->
+            <div class="editor-content">
+                <div id="editor"></div>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-left">
+                <div class="status-item">
+                    <i class="fas fa-code-branch"></i>
+                    <span>main</span>
+                </div>
+                <div class="status-item">
+                    <i class="fas fa-sync-alt"></i>
+                    <span>0 ↓ 0 ↑</span>
+                </div>
+                <div class="status-item">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span>0</span>
+                </div>
+                <div class="status-item">
+                    <i class="fas fa-info-circle"></i>
+                    <span>0</span>
+                </div>
+            </div>
+            <div class="status-right">
+                <div class="status-item">
+                    <span>UTF-8</span>
+                </div>
+                <div class="status-item">
+                    <span>LF</span>
+                </div>
+                <div class="status-item">
+                    <span>JavaScript</span>
+                </div>
+                <div class="status-item">
+                    <span>Ln 1, Col 1</span>
+                </div>
+                <div class="status-item">
+                    <i class="fas fa-bell"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Command Palette -->
+    <div class="command-palette" style="display: none;">
+        <div class="command-input-container">
+            <input type="text" class="command-input" placeholder="Type a command or search...">
+        </div>
+        <div class="command-results">
+            <div class="command-group">
+                <div class="command-group-title">Recently Used</div>
+                <div class="command-item">
+                    <div class="command-icon"><i class="fas fa-file"></i></div>
+                    <div class="command-label">New File</div>
+                    <div class="command-keybinding">Ctrl+N</div>
+                </div>
+                <div class="command-item">
+                    <div class="command-icon"><i class="fas fa-save"></i></div>
+                    <div class="command-label">Save</div>
+                    <div class="command-keybinding">Ctrl+S</div>
+                </div>
+                <div class="command-item">
+                    <div class="command-icon"><i class="fas fa-search"></i></div>
+                    <div class="command-label">Find</div>
+                    <div class="command-keybinding">Ctrl+F</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to OS button -->
+    <div class="back-to-os">
+        <a href="index.php" title="Back to ShashankOS">
+            <div class="custom-logo">
+                <div class="logo-circle"></div>
+                <div class="logo-rays">
+                    <div class="ray ray1"></div>
+                    <div class="ray ray2"></div>
+                    <div class="ray ray3"></div>
+                    <div class="ray ray4"></div>
+                </div>
+            </div>
+        </a>
+    </div>
+</body>
+
+</html>

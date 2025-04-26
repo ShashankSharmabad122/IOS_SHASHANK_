@@ -1,0 +1,972 @@
+<?php
+// Include authentication check
+include 'check_auth.php';
+
+// Get username for personalization
+$username = $_SESSION['username'] ?? 'User';
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHASHANK OS</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
+    <script defer src="app.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/brevis" rel="stylesheet">
+    
+    <!-- Script to handle direct access to Studio Code -->
+    <script>
+        // Check if URL has a hash parameter for direct app access
+        window.addEventListener('DOMContentLoaded', function() {
+            if (window.location.hash === '#studio-code') {
+                window.location.href = 'studio-code.html';
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div class="background-gradient"></div>
+
+    <main>
+        <div id="desktop">
+            <div class="app-grid">
+                <div class="app-icon" onclick="openApp('fileExplorer')">
+                    <div class="icon-3d">
+                        <span class="material-icon">folder</span>
+                    </div>
+                    <span class="app-name">Files</span>
+                </div>
+
+                <div class="app-icon" onclick="openApp('webBrowser')">
+                    <div class="icon-3d">
+                        <span class="material-icon">language</span>
+                    </div>
+                    <span class="app-name">Browser</span>
+                </div>
+
+                <div class="app-icon" onclick="openApp('settings')">
+                    <div class="icon-3d">
+                        <span class="material-icon">settings</span>
+                    </div>
+                    <span class="app-name">Settings</span>
+                </div>
+
+                <div class="app-icon" onclick="openApp('flappyBird')">
+                    <div class="icon-3d flappy-bird-icon">
+                        <div class="flappy-bird-face"></div>
+                    </div>
+                    <span class="app-name">Flappy Bird</span>
+                </div>
+
+                <div class="app-icon" onclick="openApp('paint')">
+                    <div class="icon-3d">
+                        <span class="material-icon">brush</span>
+                    </div>
+                    <span class="app-name">Paint</span>
+                </div>
+
+                <div class="app-icon" onclick="openApp('terminal')">
+                    <div class="icon-3d">
+                        <span class="material-icon">code</span>
+                    </div>
+                    <span class="app-name">Terminal</span>
+                </div>
+
+                <div class="app-icon" onclick="window.location.href='studio-code-redirect.html'">
+                    <div class="icon-3d">
+                        <span class="material-icon">code_off</span>
+                    </div>
+                    <span class="app-name">Studio-Code</span>
+                </div>
+
+                <div class="app-icon" onclick="window.location.href='portfolio-redirect.html'">
+                    <div class="icon-3d">
+                        <span class="material-icon">person</span>
+                    </div>
+                    <span class="app-name">Portfolio</span>
+                </div>
+            </div>
+
+            <div class="widgets-container">
+                <div class="widget calendar">
+                    <h3>Calendar</h3>
+                    <p id="currentDate"></p>
+                </div>
+                <div class="widget notes">
+                    <h3>Notes</h3>
+                    <textarea id="notesArea" placeholder="Write your notes here..."></textarea>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Main Menu Button Container -->
+    <div id="mainMenuContainer">
+        <div id="mainMenuButton" onclick="toggleMainMenu()" title="Open Main Menu">
+            <div class="custom-logo">
+                <div class="logo-circle"></div>
+                <div class="logo-rays">
+                    <div class="ray ray1"></div>
+                    <div class="ray ray2"></div>
+                    <div class="ray ray3"></div>
+                    <div class="ray ray4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Taskbar (hidden by default) -->
+    <div id="taskbar" class="taskbar">
+        <div class="taskbar-left">
+            <div id="taskbarStartButton" onclick="toggleStartMenu()" title="Open Main Menu">
+                <div class="custom-logo">
+                    <div class="logo-circle"></div>
+                    <div class="logo-rays">
+                        <div class="ray ray1"></div>
+                        <div class="ray ray2"></div>
+                        <div class="ray ray3"></div>
+                        <div class="ray ray4"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="os-name">SHASHANK OS</div>
+            <div class="taskbar-search">
+                <div class="search-icon">
+                    <span class="material-icon">search</span>
+                </div>
+                <input type="text" id="taskbarSearch" placeholder="Search apps and files..." onkeyup="performTaskbarSearch(event)">
+            </div>
+            <div class="taskbar-apps">
+                <div class="taskbar-app" onclick="openApp('fileExplorer')" title="Files">
+                    <span class="material-icon">folder</span>
+                </div>
+                <div class="taskbar-app" onclick="openApp('webBrowser')" title="Browser">
+                    <span class="material-icon">language</span>
+                </div>
+                <div class="taskbar-app" onclick="openApp('settings')" title="Settings">
+                    <span class="material-icon">settings</span>
+                </div>
+                <div class="taskbar-app" onclick="openApp('flappyBird')" title="Flappy Bird">
+                    <div class="mini-flappy-bird"></div>
+                </div>
+                <div class="taskbar-app" onclick="openApp('paint')" title="Paint">
+                    <span class="material-icon">brush</span>
+                </div>
+                <div class="taskbar-app" onclick="openApp('terminal')" title="Terminal">
+                    <span class="material-icon">code</span>
+                </div>
+                <div class="taskbar-app" onclick="window.location.href='studio-code-redirect.html'" title="ShashankOS Studio Code">
+                    <span class="material-icon">code_off</span>
+                </div>
+                <div class="taskbar-app" onclick="window.location.href='portfolio-redirect.html'" title="Shashank's Portfolio">
+                    <span class="material-icon">person</span>
+                </div>
+            </div>
+        </div>
+        <div class="taskbar-right">
+            <div class="taskbar-notifications" onclick="toggleNotificationCenter()" title="Notifications">
+                <span class="material-icon">notifications</span>
+            </div>
+            <div class="taskbar-time" id="taskbarTime"></div>
+            <div class="user-profile" onclick="toggleProfilePopup()">
+                <span class="material-icon">account_circle</span>
+                <span><?php echo htmlspecialchars($username); ?></span>
+                <div class="user-dropdown" onclick="event.stopPropagation()">
+                    <a href="#" onclick="toggleProfilePopup(); return false;">View Profile</a>
+                    <a href="#" onclick="toggleTheme(); return false;">Change Theme</a>
+                    <a href="auth.php?logout=1">Sign Out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Search Results Panel -->
+    <div id="searchResultsPanel" class="search-results-panel">
+        <div class="search-results-header">
+            <h3>Search Results</h3>
+            <div class="search-close" onclick="closeSearchResults()">
+                <span class="material-icon">close</span>
+            </div>
+        </div>
+        <div id="searchResultsList" class="search-results-list">
+            <!-- Search results will be populated here -->
+        </div>
+    </div>
+    
+    <!-- Floating Action Button removed and placed in dedicated container -->
+    
+    <!-- Floating system info -->
+    <div id="floatingSystemInfo">
+        <span id="currentTime"></span>
+    </div>
+    
+    <!-- Notification Center will be added dynamically by JavaScript -->
+
+    <!-- Windows for apps -->
+    <div id="fileExplorerWindow" class="window" style="display: none;">
+        <div class="window-header">
+            <span>Files</span>
+            <div class="window-controls">
+                <button class="minimize" onclick="minimizeWindow('fileExplorerWindow')">—</button>
+                <button class="maximize" onclick="maximizeWindow('fileExplorerWindow')">□</button>
+                <button class="close" onclick="closeWindow('fileExplorerWindow')">×</button>
+            </div>
+        </div>
+        <div class="window-content">
+            <div class="sidebar">
+                <ul id="systemFolders">
+                    <li>Desktop</li>
+                    <li>Documents</li>
+                    <li>Downloads</li>
+                    <li>Pictures</li>
+                    <li>Music</li>
+                    <li>Videos</li>
+                </ul>
+            </div>
+            <div id="fileOperations">
+                <!-- Placeholder for file operations -->
+            </div>
+        </div>
+    </div>
+
+    <div id="webBrowserWindow" class="window" style="display: none;">
+        <div class="window-header">
+            <span>Browser</span>
+            <div class="window-controls">
+                <button class="minimize" onclick="minimizeWindow('webBrowserWindow')">—</button>
+                <button class="maximize" onclick="maximizeWindow('webBrowserWindow')">□</button>
+                <button class="close" onclick="closeWindow('webBrowserWindow')">×</button>
+            </div>
+        </div>
+        <div class="window-content">
+            <div class="browser-toolbar">
+                <button class="nav-button" onclick="navigateBack()" title="Back">←</button>
+                <button class="nav-button" onclick="navigateForward()" title="Forward">→</button>
+                <button class="nav-button" onclick="refreshPage()" title="Refresh">↻</button>
+                <button class="nav-button" onclick="goToHomePage()" title="Home">
+                    <span class="material-icon">home</span>
+                </button>
+                <div class="search-bar-container">
+                    <div class="search-icon">
+                        <span class="material-icon">search</span>
+                    </div>
+                    <input type="text" id="addressBar" placeholder="Search Google or enter URL..."
+                           onkeydown="if(event.key === 'Enter') loadPage()"
+                           onfocus="toggleSearchSuggestions()">
+                    <div id="searchSuggestions" class="search-suggestions"></div>
+                </div>
+                <button class="nav-button" onclick="loadPage()" title="Go">
+                    <span class="material-icon">arrow_forward</span>
+                </button>
+            </div>
+            <div class="browser-status-bar">
+                <div class="browser-status-text">Ready</div>
+                <div class="browser-security">
+                    <span class="material-icon">lock</span>
+                    <span>Secure</span>
+                </div>
+            </div>
+            <div id="browserContent" class="browser-content"></div>
+        </div>
+    </div>
+
+    <div id="settingsWindow" class="window" style="display: none;">
+        <div class="window-header">
+            <span>Settings</span>
+            <div class="window-controls">
+                <button class="minimize" onclick="minimizeWindow('settingsWindow')">—</button>
+                <button class="maximize" onclick="maximizeWindow('settingsWindow')">□</button>
+                <button class="close" onclick="closeWindow('settingsWindow')">×</button>
+            </div>
+        </div>
+        <div class="window-content">
+            <div class="settings-grid">
+                <div class="settings-card" onclick="toggleTheme()">
+                    <span class="material-icon">dark_mode</span>
+                    <span>Toggle Theme</span>
+                </div>
+                <div class="settings-card" onclick="toggleAdaptiveWallpaper()">
+                    <span class="material-icon">auto_awesome</span>
+                    <span>Adaptive Wallpaper</span>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3><span class="material-icon">wallpaper</span> Wallpaper Gallery</h3>
+                <div id="wallpaperGallery" class="wallpaper-gallery"></div>
+            </div>
+
+            <div id="systemInfo">
+                <p>OS Name: Shashank IOS</p>
+                <p>Version: 1.0</p>
+                <p>RAM Usage: 50%</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="flappyBirdWindow" class="window" style="display: none;">
+        <div class="window-header flappy-header">
+            <div class="flappy-title">
+                <div class="mini-flappy-bird"></div>
+                <span>Flappy Bird</span>
+            </div>
+            <div class="window-controls">
+                <button class="minimize" onclick="minimizeWindow('flappyBirdWindow')">—</button>
+                <button class="maximize" onclick="maximizeWindow('flappyBirdWindow')">□</button>
+                <button class="close" onclick="closeWindow('flappyBirdWindow')">×</button>
+            </div>
+        </div>
+        <div class="window-content">
+            <canvas id="flappyBirdCanvas" width="320" height="480"></canvas>
+        </div>
+    </div>
+
+    <div id="paintWindow" class="window" style="display: none;">
+        <div class="window-header">
+            <span>Paint</span>
+            <div class="window-controls">
+                <button class="minimize" onclick="minimizeWindow('paintWindow')">—</button>
+                <button class="maximize" onclick="maximizeWindow('paintWindow')">□</button>
+                <button class="close" onclick="closeWindow('paintWindow')">×</button>
+            </div>
+        </div>
+        <div class="window-content">
+            <div id="paintTools">
+                <button onclick="setTool('brush')">Brush</button>
+                <button onclick="setTool('eraser')">Eraser</button>
+                <button onclick="setTool('rectangle')">Rectangle</button>
+                <button onclick="setTool('circle')">Circle</button>
+                <input type="color" id="colorPicker" value="#000000" onchange="setColor(this.value)">
+                <select id="brushSize" onchange="setBrushSize(this.value)">
+                    <option value="5">Small</option>
+                    <option value="10">Medium</option>
+                    <option value="20">Large</option>
+                </select>
+                <button onclick="clearCanvas()">Clear</button>
+                <button onclick="saveCanvas()">Save</button>
+            </div>
+            <canvas id="paintCanvas" width="500" height="400"></canvas>
+        </div>
+    </div>
+
+    <div id="terminalWindow" class="window" style="display: none;">
+        <div class="window-header">
+            <span>Terminal</span>
+            <div class="window-controls">
+                <button class="minimize" onclick="minimizeWindow('terminalWindow')">—</button>
+                <button class="maximize" onclick="maximizeWindow('terminalWindow')">□</button>
+                <button class="close" onclick="closeWindow('terminalWindow')">×</button>
+            </div>
+        </div>
+        <div class="window-content terminal-content">
+            <div id="terminalOutput">
+                <div class="terminal-welcome">
+                    <p>Welcome to Shashank OS Terminal v1.0</p>
+                    <p>Type 'help' to see available commands</p>
+                    <p>© 2023 Shashank OS</p>
+                </div>
+            </div>
+            <div class="terminal-input-line">
+                <span class="terminal-prompt">user@shashank-os:~$</span>
+                <input type="text" id="terminalInput" autofocus placeholder="Enter command..." onkeydown="if(event.key === 'Enter') executeCommand()">
+            </div>
+            <script>
+                function executeCommand() {
+                    // Call the executeCommand function defined in app.js
+                    if (typeof window.executeCommand === 'function') {
+                        window.executeCommand();
+                    } else {
+                        // Direct call to the function in app.js
+                        window.executeCommand = window.executeCommand || this.executeCommand;
+                    }
+                }
+            </script>
+        </div>
+    </div>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Profile Popup Window -->
+    <div id="profilePopupWindow" class="window profile-popup" style="display: none;">
+        <div class="window-header">
+            <span>User Profile</span>
+            <div class="window-controls">
+                <button class="minimize" onclick="minimizeWindow('profilePopupWindow')">—</button>
+                <button class="maximize" onclick="maximizeWindow('profilePopupWindow')">□</button>
+                <button class="close" onclick="closeWindow('profilePopupWindow')">×</button>
+            </div>
+        </div>
+        <div class="window-content">
+            <div class="profile-tabs">
+                <div class="tab-header">
+                    <div class="tab-button active" data-tab="profile-overview" onclick="switchProfileTab('profile-overview')">
+                        <span class="material-icon">person</span> Overview
+                    </div>
+                    <div class="tab-button" data-tab="profile-activity" onclick="switchProfileTab('profile-activity')">
+                        <span class="material-icon">history</span> Activity
+                    </div>
+                    <div class="tab-button" data-tab="profile-security" onclick="switchProfileTab('profile-security')">
+                        <span class="material-icon">security</span> Security
+                    </div>
+                    <div class="tab-button" data-tab="profile-preferences" onclick="switchProfileTab('profile-preferences')">
+                        <span class="material-icon">tune</span> Preferences
+                    </div>
+                </div>
+                
+                <div class="tab-content">
+                    <!-- Profile Overview Tab -->
+                    <div class="tab-pane active" id="profile-overview">
+                        <div class="profile-container">
+                            <div class="profile-header">
+                                <div class="profile-avatar-container" onclick="changeAvatar()">
+                                    <div class="profile-avatar">
+                                        <span class="material-icon large-icon">account_circle</span>
+                                    </div>
+                                    <div class="avatar-change-overlay">
+                                        <span class="material-icon">photo_camera</span>
+                                    </div>
+                                </div>
+                                <div class="profile-info">
+                                    <h2><?php echo htmlspecialchars($username); ?></h2>
+                                    <p class="user-id"><?php echo isset($_SESSION['user_id']) ? htmlspecialchars($_SESSION['user_id']) : 'SHSK'.rand(1000, 9999); ?></p>
+                                    <p class="user-email"><?php echo isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : 'user@example.com'; ?></p>
+                                    <div class="user-status-selector">
+                                        <div class="status-indicator online"></div>
+                                        <select id="userStatusSelect" onchange="changeUserStatus(this.value)">
+                                            <option value="online">Online</option>
+                                            <option value="away">Away</option>
+                                            <option value="busy">Busy</option>
+                                            <option value="invisible">Invisible</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="profile-quick-actions">
+                                    <button class="edit-profile-btn" onclick="editProfile()" title="Edit Profile">
+                                        <span class="material-icon">edit</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="profile-stats">
+                                <div class="stat-card">
+                                    <span class="material-icon">schedule</span>
+                                    <div class="stat-info">
+                                        <h3>Login Time</h3>
+                                        <p id="loginTime"><?php echo date('H:i:s'); ?></p>
+                                        <p class="stat-detail">Session: <span id="sessionDuration">00:45:12</span></p>
+                                    </div>
+                                </div>
+                                <div class="stat-card">
+                                    <span class="material-icon">memory</span>
+                                    <div class="stat-info">
+                                        <h3>System Usage</h3>
+                                        <div class="usage-bar">
+                                            <div class="usage-progress" style="width: 32%"></div>
+                                            <span>CPU: <span id="cpuUsage">32%</span></span>
+                                        </div>
+                                        <div class="usage-bar">
+                                            <div class="usage-progress" style="width: 45%"></div>
+                                            <span>RAM: <span id="ramUsage">1.2 GB</span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="stat-card">
+                                    <span class="material-icon">storage</span>
+                                    <div class="stat-info">
+                                        <h3>Storage</h3>
+                                        <div class="usage-bar">
+                                            <div class="usage-progress" style="width: 27%"></div>
+                                            <span><span id="storageUsed">5.4</span> GB / <span id="storageFree">14.6</span> GB</span>
+                                        </div>
+                                        <p class="storage-detail">
+                                            <span class="storage-type docs">Docs</span>
+                                            <span class="storage-type media">Media</span>
+                                            <span class="storage-type apps">Apps</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="stat-card">
+                                    <span class="material-icon">security</span>
+                                    <div class="stat-info">
+                                        <h3>Security Status</h3>
+                                        <div class="security-status high">
+                                            <span class="material-icon">verified</span>
+                                            <span>Protected</span>
+                                        </div>
+                                        <p class="last-scan">Last scan: Today</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="profile-bio-section">
+                                <h3>About Me</h3>
+                                <div class="bio-content" id="userBio">
+                                    <p>Welcome to my profile! I'm a Shashank OS user exploring all the amazing features of this system.</p>
+                                </div>
+                                <button class="edit-bio-btn" onclick="editBio()">
+                                    <span class="material-icon">edit</span>
+                                </button>
+                            </div>
+                            
+                            <div class="quick-access-section">
+                                <h3>Quick Access</h3>
+                                <div class="quick-access-grid">
+                                    <div class="quick-access-item" onclick="openApp('fileExplorer')">
+                                        <span class="material-icon">folder</span>
+                                        <span>My Files</span>
+                                    </div>
+                                    <div class="quick-access-item" onclick="openApp('settings')">
+                                        <span class="material-icon">settings</span>
+                                        <span>Settings</span>
+                                    </div>
+                                    <div class="quick-access-item" onclick="toggleTheme()">
+                                        <span class="material-icon">dark_mode</span>
+                                        <span>Theme</span>
+                                    </div>
+                                    <div class="quick-access-item" onclick="showBackupDialog()">
+                                        <span class="material-icon">backup</span>
+                                        <span>Backup</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="recent-activity">
+                                <h3>Recent Activity</h3>
+                                <ul id="activityList">
+                                    <li><span class="activity-time">Now</span> Viewed profile</li>
+                                    <li><span class="activity-time">5m ago</span> Changed theme</li>
+                                    <li><span class="activity-time">10m ago</span> Opened Files</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Activity Log Tab -->
+                    <div class="tab-pane" id="profile-activity">
+                        <div class="activity-log-container">
+                            <div class="activity-header">
+                                <h3>Activity Log</h3>
+                                <div class="activity-filters">
+                                    <select id="activityTypeFilter" onchange="filterActivityLog()">
+                                        <option value="all">All Activities</option>
+                                        <option value="login">Login/Logout</option>
+                                        <option value="app">App Usage</option>
+                                        <option value="system">System Changes</option>
+                                        <option value="security">Security Events</option>
+                                    </select>
+                                    <div class="date-filter">
+                                        <span class="material-icon">date_range</span>
+                                        <select id="activityDateFilter" onchange="filterActivityLog()">
+                                            <option value="today">Today</option>
+                                            <option value="yesterday">Yesterday</option>
+                                            <option value="week">This Week</option>
+                                            <option value="month">This Month</option>
+                                            <option value="all" selected>All Time</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="activity-timeline">
+                                <div class="timeline-date">Today</div>
+                                
+                                <div class="activity-item" data-type="login">
+                                    <div class="activity-icon login">
+                                        <span class="material-icon">login</span>
+                                    </div>
+                                    <div class="activity-content">
+                                        <div class="activity-title">System Login</div>
+                                        <div class="activity-details">Logged in from Chrome browser</div>
+                                        <div class="activity-time">10:15 AM</div>
+                                    </div>
+                                    <div class="activity-actions">
+                                        <button class="activity-action-btn" title="View Details">
+                                            <span class="material-icon">info</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="activity-item" data-type="app">
+                                    <div class="activity-icon app">
+                                        <span class="material-icon">apps</span>
+                                    </div>
+                                    <div class="activity-content">
+                                        <div class="activity-title">Opened File Explorer</div>
+                                        <div class="activity-details">Browsed Documents folder</div>
+                                        <div class="activity-time">10:23 AM</div>
+                                    </div>
+                                    <div class="activity-actions">
+                                        <button class="activity-action-btn" title="View Details">
+                                            <span class="material-icon">info</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="activity-item" data-type="system">
+                                    <div class="activity-icon system">
+                                        <span class="material-icon">settings</span>
+                                    </div>
+                                    <div class="activity-content">
+                                        <div class="activity-title">Changed System Settings</div>
+                                        <div class="activity-details">Modified display preferences</div>
+                                        <div class="activity-time">11:05 AM</div>
+                                    </div>
+                                    <div class="activity-actions">
+                                        <button class="activity-action-btn" title="View Details">
+                                            <span class="material-icon">info</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="activity-item" data-type="app">
+                                    <div class="activity-icon app">
+                                        <span class="material-icon">brush</span>
+                                    </div>
+                                    <div class="activity-content">
+                                        <div class="activity-title">Used Paint App</div>
+                                        <div class="activity-details">Created and saved new artwork</div>
+                                        <div class="activity-time">11:45 AM</div>
+                                    </div>
+                                    <div class="activity-actions">
+                                        <button class="activity-action-btn" title="View Details">
+                                            <span class="material-icon">info</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="timeline-date">Yesterday</div>
+                                
+                                <div class="activity-item" data-type="security">
+                                    <div class="activity-icon security">
+                                        <span class="material-icon">security</span>
+                                    </div>
+                                    <div class="activity-content">
+                                        <div class="activity-title">Security Scan Completed</div>
+                                        <div class="activity-details">No threats detected</div>
+                                        <div class="activity-time">3:30 PM</div>
+                                    </div>
+                                    <div class="activity-actions">
+                                        <button class="activity-action-btn" title="View Details">
+                                            <span class="material-icon">info</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="activity-item" data-type="login">
+                                    <div class="activity-icon logout">
+                                        <span class="material-icon">logout</span>
+                                    </div>
+                                    <div class="activity-content">
+                                        <div class="activity-title">System Logout</div>
+                                        <div class="activity-details">Session ended</div>
+                                        <div class="activity-time">6:45 PM</div>
+                                    </div>
+                                    <div class="activity-actions">
+                                        <button class="activity-action-btn" title="View Details">
+                                            <span class="material-icon">info</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="activity-load-more">
+                                <button id="loadMoreActivities" onclick="loadMoreActivities()">
+                                    <span class="material-icon">expand_more</span>
+                                    Load More
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Security Tab -->
+                    <div class="tab-pane" id="profile-security">
+                        <div class="security-container">
+                            <div class="security-header">
+                                <h3>Security Settings</h3>
+                                <div class="security-status-indicator">
+                                    <div class="status-icon secure">
+                                        <span class="material-icon">security</span>
+                                    </div>
+                                    <div class="status-text">
+                                        <span class="status-label">Security Status:</span>
+                                        <span class="status-value secure">Secure</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="security-section">
+                                <h4>Account Security</h4>
+                                
+                                <div class="security-item">
+                                    <div class="security-item-icon">
+                                        <span class="material-icon">password</span>
+                                    </div>
+                                    <div class="security-item-content">
+                                        <div class="security-item-title">Password</div>
+                                        <div class="security-item-description">Last changed 30 days ago</div>
+                                    </div>
+                                    <div class="security-item-action">
+                                        <button onclick="changePassword()">Change</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="security-item">
+                                    <div class="security-item-icon">
+                                        <span class="material-icon">verified_user</span>
+                                    </div>
+                                    <div class="security-item-content">
+                                        <div class="security-item-title">Two-Factor Authentication</div>
+                                        <div class="security-item-description">Not enabled</div>
+                                    </div>
+                                    <div class="security-item-action">
+                                        <button onclick="setupTwoFactor()">Enable</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="security-item">
+                                    <div class="security-item-icon">
+                                        <span class="material-icon">devices</span>
+                                    </div>
+                                    <div class="security-item-content">
+                                        <div class="security-item-title">Connected Devices</div>
+                                        <div class="security-item-description">1 active device</div>
+                                    </div>
+                                    <div class="security-item-action">
+                                        <button onclick="manageDevices()">Manage</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="security-section">
+                                <h4>Privacy Settings</h4>
+                                
+                                <div class="security-item">
+                                    <div class="security-item-icon">
+                                        <span class="material-icon">visibility</span>
+                                    </div>
+                                    <div class="security-item-content">
+                                        <div class="security-item-title">Activity Tracking</div>
+                                        <div class="security-item-description">System tracks your activity for security</div>
+                                    </div>
+                                    <div class="security-item-action">
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" checked id="activityTrackingToggle">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="security-item">
+                                    <div class="security-item-icon">
+                                        <span class="material-icon">delete</span>
+                                    </div>
+                                    <div class="security-item-content">
+                                        <div class="security-item-title">Clear Data</div>
+                                        <div class="security-item-description">Clear browsing history and cache</div>
+                                    </div>
+                                    <div class="security-item-action">
+                                        <button onclick="clearUserData()">Clear</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="security-section">
+                                <h4>System Security</h4>
+                                
+                                <div class="security-item">
+                                    <div class="security-item-icon">
+                                        <span class="material-icon">shield</span>
+                                    </div>
+                                    <div class="security-item-content">
+                                        <div class="security-item-title">Security Scan</div>
+                                        <div class="security-item-description">Last scan: Today</div>
+                                    </div>
+                                    <div class="security-item-action">
+                                        <button onclick="runSecurityScan()">Scan Now</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="security-item">
+                                    <div class="security-item-icon">
+                                        <span class="material-icon">update</span>
+                                    </div>
+                                    <div class="security-item-content">
+                                        <div class="security-item-title">System Updates</div>
+                                        <div class="security-item-description">System is up to date</div>
+                                    </div>
+                                    <div class="security-item-action">
+                                        <button onclick="checkForUpdates()">Check</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Preferences Tab -->
+                    <div class="tab-pane" id="profile-preferences">
+                        <div class="preferences-container">
+                            <div class="preferences-header">
+                                <h3>User Preferences</h3>
+                                <button class="save-preferences-btn" onclick="savePreferences()">
+                                    <span class="material-icon">save</span>
+                                    Save Changes
+                                </button>
+                            </div>
+                            
+                            <div class="preferences-section">
+                                <h4>Appearance</h4>
+                                
+                                <div class="preference-item">
+                                    <div class="preference-label">Theme</div>
+                                    <div class="preference-control">
+                                        <div class="theme-selector">
+                                            <div class="theme-option light" onclick="selectTheme('light')">
+                                                <div class="theme-preview light-preview"></div>
+                                                <span>Light</span>
+                                            </div>
+                                            <div class="theme-option dark" onclick="selectTheme('dark')">
+                                                <div class="theme-preview dark-preview"></div>
+                                                <span>Dark</span>
+                                            </div>
+                                            <div class="theme-option auto" onclick="selectTheme('auto')">
+                                                <div class="theme-preview auto-preview"></div>
+                                                <span>Auto</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="preference-item">
+                                    <div class="preference-label">Accent Color</div>
+                                    <div class="preference-control">
+                                        <div class="color-selector">
+                                            <div class="color-option" style="background-color: #6366f1;" onclick="selectAccentColor('#6366f1')"></div>
+                                            <div class="color-option" style="background-color: #3b82f6;" onclick="selectAccentColor('#3b82f6')"></div>
+                                            <div class="color-option" style="background-color: #10b981;" onclick="selectAccentColor('#10b981')"></div>
+                                            <div class="color-option" style="background-color: #f59e0b;" onclick="selectAccentColor('#f59e0b')"></div>
+                                            <div class="color-option" style="background-color: #ef4444;" onclick="selectAccentColor('#ef4444')"></div>
+                                            <div class="color-option" style="background-color: #8b5cf6;" onclick="selectAccentColor('#8b5cf6')"></div>
+                                            <div class="color-option" style="background-color: #ec4899;" onclick="selectAccentColor('#ec4899')"></div>
+                                            <div class="color-option custom" onclick="showCustomColorPicker()">
+                                                <span class="material-icon">add</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="preference-item">
+                                    <div class="preference-label">Wallpaper</div>
+                                    <div class="preference-control">
+                                        <button class="change-wallpaper-btn" onclick="openWallpaperGallery()">
+                                            <span class="material-icon">wallpaper</span>
+                                            Change Wallpaper
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="preferences-section">
+                                <h4>System</h4>
+                                
+                                <div class="preference-item">
+                                    <div class="preference-label">Notifications</div>
+                                    <div class="preference-control">
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" checked id="notificationsToggle">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="preference-item">
+                                    <div class="preference-label">Sound Effects</div>
+                                    <div class="preference-control">
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" checked id="soundEffectsToggle">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="preference-item">
+                                    <div class="preference-label">Animations</div>
+                                    <div class="preference-control">
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" checked id="animationsToggle">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="preference-item">
+                                    <div class="preference-label">Language</div>
+                                    <div class="preference-control">
+                                        <select id="languageSelect">
+                                            <option value="en">English</option>
+                                            <option value="es">Español</option>
+                                            <option value="fr">Français</option>
+                                            <option value="de">Deutsch</option>
+                                            <option value="ja">日本語</option>
+                                            <option value="zh">中文</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="preference-item">
+                                    <div class="preference-label">Time Format</div>
+                                    <div class="preference-control">
+                                        <select id="timeFormatSelect">
+                                            <option value="12">12-hour (AM/PM)</option>
+                                            <option value="24">24-hour</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="preferences-section">
+                                <h4>Accessibility</h4>
+                                
+                                <div class="preference-item">
+                                    <div class="preference-label">Font Size</div>
+                                    <div class="preference-control">
+                                        <div class="range-slider">
+                                            <input type="range" min="80" max="120" value="100" id="fontSizeSlider">
+                                            <div class="range-value"><span id="fontSizeValue">100%</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="preference-item">
+                                    <div class="preference-label">High Contrast</div>
+                                    <div class="preference-control">
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="highContrastToggle">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="preference-item">
+                                    <div class="preference-label">Reduce Motion</div>
+                                    <div class="preference-control">
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="reduceMotionToggle">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
