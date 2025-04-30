@@ -173,6 +173,8 @@ function updateTime() {
     }
 }
 
+
+
 // Animate on scroll functionality
 window.addEventListener('scroll', function() {
     const animatedElements = document.querySelectorAll('.project-card, .service-card, .feature-card, .skill-item');

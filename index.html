@@ -32,6 +32,14 @@ $username = $_SESSION['username'] ?? 'User';
 
 <body>
     <div class="background-gradient"></div>
+    
+    <!-- Video Background -->
+    <div class="video-background">
+        <video autoplay muted loop id="bgVideo">
+            <source src="0001-0250.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+    </div>
 
     <main>
         <div id="desktop">
@@ -294,6 +302,10 @@ $username = $_SESSION['username'] ?? 'User';
                 <div class="settings-card" onclick="toggleAdaptiveWallpaper()">
                     <span class="material-icon">auto_awesome</span>
                     <span>Adaptive Wallpaper</span>
+                </div>
+                <div class="settings-card" onclick="toggleVideoWallpaper()">
+                    <span class="material-icon">videocam</span>
+                    <span>Video Wallpaper</span>
                 </div>
             </div>
 

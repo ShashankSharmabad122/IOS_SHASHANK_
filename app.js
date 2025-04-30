@@ -1,3 +1,49 @@
+// Function to toggle video wallpaper
+function toggleVideoWallpaper() {
+    const videoBackground = document.querySelector('.video-background');
+    const backgroundGradient = document.querySelector('.background-gradient');
+    const video = document.getElementById('bgVideo');
+    const isVideoEnabled = localStorage.getItem('videoWallpaper') === 'true';
+    
+    if (isVideoEnabled) {
+        // Disable video wallpaper
+        videoBackground.style.display = 'none';
+        video.pause();
+        // Restore gradient background
+        backgroundGradient.style.opacity = '0.05';
+        localStorage.setItem('videoWallpaper', 'false');
+        showNotification('Video wallpaper disabled');
+    } else {
+        // Enable video wallpaper
+        videoBackground.style.display = 'block';
+        video.play();
+        // Hide gradient background for clean video visibility
+        backgroundGradient.style.opacity = '0';
+        localStorage.setItem('videoWallpaper', 'true');
+        showNotification('Video wallpaper enabled');
+    }
+}
+
+// Function to initialize video wallpaper based on saved preference
+function initializeVideoWallpaper() {
+    const videoBackground = document.querySelector('.video-background');
+    const backgroundGradient = document.querySelector('.background-gradient');
+    const video = document.getElementById('bgVideo');
+    const isVideoEnabled = localStorage.getItem('videoWallpaper') === 'true';
+    
+    if (isVideoEnabled) {
+        videoBackground.style.display = 'block';
+        video.play();
+        // Hide gradient background for clean video visibility
+        backgroundGradient.style.opacity = '0';
+    } else {
+        videoBackground.style.display = 'none';
+        video.pause();
+        // Restore gradient background
+        backgroundGradient.style.opacity = '0.05';
+    }
+}
+
 // Initialize the application when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     updateTime();
@@ -28,6 +74,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize search functionality
     initializeSearch();
+    
+    // Initialize video wallpaper based on saved preference
+    initializeVideoWallpaper();
     
     // Focus search when pressing Ctrl+F
     document.addEventListener('keydown', function(event) {
